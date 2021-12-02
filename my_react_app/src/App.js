@@ -1,12 +1,15 @@
 import {Component} from 'react';
+import { Card, CardBody, CardText, CardTitle, Fade, Jumbotron } from 'reactstrap';
+import TextForCards from "./TextForCards";
+import Cards from './Cards';
 import './App.css';
-import { Button, Card, CardBody, CardTitle, Jumbotron } from 'reactstrap';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state={
-      showSecondCard: false
+      fade1: false,
+      fade2: false
     }
   }
 
@@ -21,20 +24,21 @@ class App extends Component {
           <p>Playing with reactstrap</p>
           <p className={cname}></p>
        </Jumbotron>
-       <Card key="firstCard">
-         <CardBody>
-           <CardTitle>My Card</CardTitle>
-           <Button onClick={() => this.setState({ showSecondCard : true })} >Button</Button>
-         </CardBody>
-       </Card>
-       {this.state.showSecondCard ? <Card>
-         <CardBody>
-           <CardTitle>My Second Card</CardTitle>
-           <Button onClick={() => this.setState({ showSecondCard : false })} >Button</Button>
-         </CardBody>
-       </Card> : null}
+       <Cards
+         fade1={this.state.fade1}
+         cardOneState={this.cardOneState}
+         fade2={this.state.fade2}
+         cardTwoState={this.cardTwoState} />
       </div>
     )
+  }
+
+  cardOneState= () =>{
+    this.setState({fade1 : !this.state.fade1})
+  }
+
+  cardTwoState=() =>{
+    this.setState({fade2 : !this.state.fade2})
   }
 }
 
